@@ -6,5 +6,8 @@
     <item name="colorPrimary">@color/tasky_primary</item>
     <item name="colorPrimaryDark">@color/tasky_primary_dark</item>
     <item name="colorAccent">@color/tasky_accent</item>
+    <item name="android:colorButtonNormal">@color/tasky_primary</item>
+    <item name="android:textColorPrimary">@color/tasky_grey</item>
+    <item name="android:textColor">@color/tasky_white</item>
   </style>
 </resources>

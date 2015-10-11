@@ -60,7 +60,10 @@ namespace Tasky.Managers
         /// <returns>An awaitbale task</returns>
 		public async Task SaveCurrentTask()
 		{
-		    await this._repository.SaveTaskItem(this.CurrentTaskItem);
+            if (!string.IsNullOrEmpty(this.CurrentTaskItem.Name))
+            {
+                await this._repository.SaveTaskItem(this.CurrentTaskItem);
+            }
 		}
 		
         /// <summary>

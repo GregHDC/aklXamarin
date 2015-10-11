@@ -23,7 +23,7 @@ namespace TaskyAndroid.Activities
     /// Public class HomeActivity. Inherits from <see cref="BaseViewModelActivity{IHomeViewModel}"/>.
     /// Displays the Home Screen.
     /// </summary>
-    [Activity (Label = "TaskyPro", MainLauncher = true, Icon="@drawable/ic_launcher")]
+    [Activity(Label = "TaskyPro", MainLauncher = true, Icon = "@drawable/ic_launcher", Theme = "@style/Tasky")]
     public class HomeActivity : BaseViewModelActivity<IHomeViewModel>
     {
         /// <summary>

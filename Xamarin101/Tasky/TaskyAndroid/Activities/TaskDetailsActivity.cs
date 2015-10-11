@@ -13,14 +13,14 @@ namespace TaskyAndroid.Activities
     using Android.OS;
     using Android.Support.V7.Widget;
     using Android.Widget;
-    using Shared;
     using Tasky.Interfaces;
+    using Toolbar = Android.Support.V7.Widget.Toolbar;
 
     /// <summary>
     /// Public class TaskDetailsActivity. Inherits from <see cref="BaseViewModelActivity{ITaskDetailsViewModel}"/>.
     /// Displays the Task Details.
     /// </summary>
-    [Activity (Label = "Task Details")]			
+    [Activity(Label = "Task Details", Theme = "@style/Tasky")]			
 	public class TaskDetailsActivity : BaseViewModelActivity<ITaskDetailsViewModel>
     {
         /// <summary>
@@ -74,6 +74,10 @@ namespace TaskyAndroid.Activities
 			// set our layout to be the home screen
             this.SetContentView(Resource.Layout.TaskActivityView);
 
+            Toolbar toolBar = this.FindViewById<Toolbar>(Resource.Id.applicationToolbar);
+            this.SetSupportActionBar(toolBar);
+            this.SupportActionBar.SetDisplayHomeAsUpEnabled(true);
+
             // find all our controls
             this._notesEditText = this.FindViewById<EditText>(Resource.Id.notesEditText);
             this._nameEditText = this.FindViewById<EditText>(Resource.Id.nameEditText);
@@ -93,7 +97,7 @@ namespace TaskyAndroid.Activities
         {
             base.OnResume();
             
-            await this.ViewModel.LoadTask(this.TaskId);
+            await this.ViewModel.LoadTask(this._taskId);
 
             // set the cancel delete based on whether or not it's an existing task
             this._cancelDeleteButton.Text = this.ViewModel.CurrentTaskItem.Id == 0 ? "Cancel" : "Delete";
