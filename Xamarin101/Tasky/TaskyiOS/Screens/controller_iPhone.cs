@@ -1,15 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UIKit;
-using MonoTouch.Dialog;
-using Foundation;
-using Tasky.AL;
-using Tasky.BL;
+namespace Tasky.Screens 
+{
+    using System.Collections.Generic;
+    using System.Linq;
+    using AL;
+    using Foundation;
+    using Interfaces;
+    using Models;
+    using MonoTouch.Dialog;
+    using Shared;
+    using UIKit;
 
-namespace Tasky.Screens {
-	public class controller_iPhone : DialogViewController {
-		List<TaskItem> taskItems;
+    public class controller_iPhone : DialogViewController 
+    {
+		IList<TaskItem> taskItems;
 		
 		public controller_iPhone () : base (UITableViewStyle.Plain, null)
 		{
@@ -39,24 +42,27 @@ namespace Tasky.Screens {
 			detailsScreen = new DialogViewController (context.Root, true);
 			ActivateController(detailsScreen);
 		}
-		public void SaveTask()
+		
+        public async void SaveTask()
 		{
 			context.Fetch (); // re-populates with updated values
 			currentTaskItem.Name = taskItemDialog.Name;
 			currentTaskItem.Notes = taskItemDialog.Notes;
 			currentTaskItem.Done = taskItemDialog.Done;
-			BL.Managers.TaskItemManager.SaveTask(currentTaskItem);
+			await BootStrapper.Resolve<ITaskItemManager>().SaveTask(currentTaskItem);
 			NavigationController.PopViewController (true);
 			//context.Dispose (); // per documentation
 		}
-		public void DeleteTask ()
+		
+        public async void DeleteTask ()
 		{
-			if (currentTaskItem.ID >= 0)
-				BL.Managers.TaskItemManager.DeleteTask (currentTaskItem.ID);
+		    if (currentTaskItem != null)
+		    {
+                await BootStrapper.Resolve<ITaskItemManager>().DeleteTask(currentTaskItem);
+		    }
+				
 			NavigationController.PopViewController (true);
 		}
-
-
 
 		public override void ViewWillAppear (bool animated)
 		{
@@ -66,9 +72,9 @@ namespace Tasky.Screens {
 			PopulateTable();			
 		}
 		
-		protected void PopulateTable ()
+		protected async void PopulateTable ()
 		{
-			taskItems = BL.Managers.TaskItemManager.GetTasks ().ToList ();
+		    taskItems = await BootStrapper.Resolve<ITaskItemManager>().GetTasks();
 			var newTask = NSBundle.MainBundle.LocalizedString ("<new task>", "<new task>");
 				
 			Root.Clear ();
@@ -77,18 +83,21 @@ namespace Tasky.Screens {
 				select (Element) new CheckboxElement((t.Name == "" ? newTask : t.Name), t.Done)
 			});
 		}
+
 		public override void Selected (NSIndexPath indexPath)
 		{
 			var task = taskItems[indexPath.Row];
 			ShowTaskDetails(task);
 		}
+
 		public override Source CreateSizingSource (bool unevenRows)
 		{
 			return new EditingSource (this);
 		}
-		public void DeleteTaskRow(int rowId)
+
+		public async void DeleteTaskRow(int rowId)
 		{
-			BL.Managers.TaskItemManager.DeleteTask(taskItems[rowId].ID);
+		    await BootStrapper.Resolve<ITaskItemManager>().DeleteTask(taskItems[rowId]);
 		}
 	}
 }

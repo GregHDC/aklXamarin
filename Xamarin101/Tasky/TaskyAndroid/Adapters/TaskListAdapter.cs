@@ -1,16 +1,16 @@
-using System;
-using System.Collections.Generic;
-using Android.Widget;
-using Tasky.BL;
-using Android.App;
-using Android;
+namespace TaskyAndroid.Adapters 
+{
+    using System.Collections.Generic;
+    using Android.App;
+    using Android.Widget;
+    using Tasky.Models;
 
-namespace TaskyAndroid.Adapters {
-	public class TaskListAdapter : BaseAdapter<TaskItem> {
+    public class TaskListAdapter : BaseAdapter<TaskItem> 
+    {
 		protected Activity context = null;
 		protected IList<TaskItem> taskItems = new List<TaskItem>();
 		
-		public TaskListAdapter (Activity context, IList<TaskItem> taskItems) : base ()
+		public TaskListAdapter (Activity context, IList<TaskItem> taskItems)
 		{
 			this.context = context;
 			this.taskItems = taskItems;

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
@@ -9,12 +9,14 @@
     <Import_RootNamespace>Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)SQLite.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Contracts\BusinessEntityBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Contracts\IBusinessEntity.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TaskItem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TaskItemDatabase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TaskItemManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)TaskItemRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)BootStrapper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ITaskItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IBusinessEntity.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ITaskItemManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ITaskRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Managers\TaskItemManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BusinessEntityBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\TaskItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Repository\TaskRepository.cs" />
   </ItemGroup>
 </Project>

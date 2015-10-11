@@ -1,36 +1,34 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Microsoft.Phone.Controls;
-using Tasky.BL.Managers;
-using Tasky.BL;
+﻿namespace TaskyWP7 
+{
+    using System;
+    using Microsoft.Phone.Controls;
+    using Shared;
+    using Tasky.Interfaces;
+    using Tasky.Managers;
+    using Tasky.Models;
 
-namespace TaskyWP7 {
     public partial class TaskDetailsPage : PhoneApplicationPage {
         public TaskDetailsPage()
         {
             InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        protected override async void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
             if (e.NavigationMode == System.Windows.Navigation.NavigationMode.New) {
                 var vm = new TaskViewModel();
-                var task = default(TaskItem);
+                ITaskItem task;
 
-                if (NavigationContext.QueryString.ContainsKey("id")) {
+                if (NavigationContext.QueryString.ContainsKey("id"))
+                {
                     var id = int.Parse(NavigationContext.QueryString["id"]);
-                    task = TaskItemManager.GetTask(id);
+                    task = await BootStrapper.Resolve<ITaskItemManager>().GetTask(id);
+                }
+                else
+                {
+                    task = BootStrapper.Resolve<ITaskItem>();
                 }
 
                 if (task != null) {
@@ -41,20 +39,23 @@ namespace TaskyWP7 {
             }
         }
 
-        private void HandleSave(object sender, EventArgs e)
+        private async void HandleSave(object sender, EventArgs e)
         {
             var taskvm = (TaskViewModel)DataContext;
             var task = taskvm.GetTask();
-            TaskItemManager.SaveTask(task);
+            await BootStrapper.Resolve<ITaskItemManager>().SaveTask(task);
 
             NavigationService.GoBack();
         }
 
-        private void HandleDelete(object sender, EventArgs e)
+        private async void HandleDelete(object sender, EventArgs e)
         {
-            var taskvm = (TaskViewModel)DataContext;
-            if (taskvm.ID >= 0)
-                TaskItemManager.DeleteTask(taskvm.ID);
+            TaskViewModel taskvm = (TaskViewModel)DataContext;
+
+            if (taskvm.GetTask() != null)
+            {
+                await BootStrapper.Resolve<ITaskItemManager>().DeleteTask(taskvm.GetTask());
+            }
 
             NavigationService.GoBack();
         }

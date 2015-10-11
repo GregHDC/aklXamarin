@@ -1,15 +1,19 @@
-using System.Collections.Generic;
-using Android.App;
-using Android.Content;
-using Android.Graphics;
-using Android.OS;
-using Android.Views;
-using Android.Widget;
-using Tasky.BL;
+namespace TaskyAndroid.Screens 
+{
+    using System.Collections.Generic;
+    using Android.App;
+    using Android.Content;
+    using Android.Graphics;
+    using Android.OS;
+    using Android.Views;
+    using Android.Widget;
+    using Shared;
+    using Tasky.Interfaces;
+    using Tasky.Models;
 
-namespace TaskyAndroid.Screens {
-	[Activity (Label = "TaskyPro", MainLauncher = true, Icon="@drawable/ic_launcher")]			
-	public class HomeScreen : Activity {
+    [Activity (Label = "TaskyPro", MainLauncher = true, Icon="@drawable/ic_launcher")]			
+	public class HomeScreen : Activity 
+    {
 		protected Adapters.TaskListAdapter taskItemListAdapter;
 		protected IList<TaskItem> taskItems;
 		protected Button addTaskButton = null;
@@ -18,7 +22,6 @@ namespace TaskyAndroid.Screens {
 		protected override void OnCreate (Bundle bundle)
 		{
 			base.OnCreate (bundle);
-			
 
 			View titleView = Window.FindViewById(Android.Resource.Id.Title);
 			if (titleView != null) {
@@ -28,7 +31,6 @@ namespace TaskyAndroid.Screens {
 			    parentView.SetBackgroundColor(Color.Rgb(0x26, 0x75 ,0xFF)); //38, 117 ,255
 			  }
 			}
-
 
 			// set our layout to be the home screen
 			SetContentView(Resource.Layout.HomeScreen);
@@ -54,11 +56,11 @@ namespace TaskyAndroid.Screens {
 			}
 		}
 		
-		protected override void OnResume ()
+		protected override async void OnResume ()
 		{
 			base.OnResume ();
 
-			taskItems = Tasky.BL.Managers.TaskItemManager.GetTasks();
+		    taskItems = await BootStrapper.Resolve<ITaskItemManager>().GetTasks();
 			
 			// create our adapter
 			taskItemListAdapter = new Adapters.TaskListAdapter(this, taskItems);

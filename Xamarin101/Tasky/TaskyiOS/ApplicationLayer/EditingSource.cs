@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UIKit;
-using MonoTouch.Dialog;
-using Foundation;
-using Tasky.BL;
-
 namespace Tasky.AL
 {
-	// This is our subclass of the fixed-size Source that allows editing
+    using Foundation;
+    using MonoTouch.Dialog;
+    using UIKit;
+
+    // This is our subclass of the fixed-size Source that allows editing
 	public class EditingSource : DialogViewController.Source {
 		public EditingSource (DialogViewController dvc) : base (dvc) {}
 		

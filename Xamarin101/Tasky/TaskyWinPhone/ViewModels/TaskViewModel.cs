@@ -1,16 +1,8 @@
-﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Tasky.BL;
+﻿namespace TaskyWP7 
+{
+    using Tasky.Interfaces;
+    using Tasky.Models;
 
-namespace TaskyWP7 {
     public class TaskViewModel : ViewModelBase {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -25,7 +17,7 @@ namespace TaskyWP7 {
             Update (item);
         }
 
-        public void Update (TaskItem item)
+        public void Update (ITaskItem item)
         {
             ID = item.ID;
             Name = item.Name;

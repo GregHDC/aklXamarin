@@ -1,23 +1,16 @@
-﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using System.ComponentModel;
-using System.Windows.Threading;
-using Tasky.BL;
-using System.Collections.ObjectModel;
-using Tasky.BL.Managers;
-using System.Threading;
-using System.Collections.Generic;
-using System.Linq;
+﻿namespace TaskyWP7 
+{
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using System.Threading;
+    using System.Windows;
+    using System.Windows.Threading;
+    using Shared;
+    using Tasky.Interfaces;
+    using Tasky.Managers;
+    using Tasky.Models;
 
-namespace TaskyWP7 {
     public class TaskListViewModel : ViewModelBase {
 
         public ObservableCollection<TaskViewModel> Items { get; private set; }
@@ -41,13 +34,14 @@ namespace TaskyWP7 {
 
             IsUpdating = true;
 
-            ThreadPool.QueueUserWorkItem(delegate {
-                var entries = TaskItemManager.GetTasks();
-                PopulateData(entries);
+            ThreadPool.QueueUserWorkItem(async delegate
+            {
+                IList<TaskItem> allTasks = await BootStrapper.Resolve<ITaskItemManager>().GetTasks();
+                PopulateData(allTasks);
             });
         }
 
-        void PopulateData(IEnumerable<TaskItem> entries)
+        void PopulateData(IList<TaskItem> entries)
         {
             dispatcher.BeginInvoke(delegate {
                 //
