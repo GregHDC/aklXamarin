@@ -19,7 +19,7 @@
 
         public void Update (ITaskItem item)
         {
-            ID = item.ID;
+            ID = item.Id;
             Name = item.Name;
             Notes = item.Notes;
             Done = item.Done;
@@ -27,7 +27,7 @@
 
         public TaskItem GetTask() {
             return new TaskItem {
-                ID = this.ID,
+                Id = this.ID,
                 Name = this.Name,
                 Notes = this.Notes,
                 Done = this.Done

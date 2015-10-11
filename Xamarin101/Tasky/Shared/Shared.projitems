@@ -12,9 +12,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)BootStrapper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ITaskItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IBusinessEntity.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ITaskItemManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\IHomeViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ITaskDetailsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Interfaces\ITaskRepository.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Managers\TaskItemManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\TaskDetailsViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\HomeViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\BusinessEntityBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\TaskItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Repository\TaskRepository.cs" />

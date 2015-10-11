@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="Tasky" parent="Theme.AppCompat.Light.DarkActionBar">
+    <item name="windowNoTitle">true</item>
+    <item name="windowActionBar">false</item>
+    <item name="colorPrimary">@color/tasky_primary</item>
+    <item name="colorPrimaryDark">@color/tasky_primary_dark</item>
+    <item name="colorAccent">@color/tasky_accent</item>
+  </style>
+</resources>

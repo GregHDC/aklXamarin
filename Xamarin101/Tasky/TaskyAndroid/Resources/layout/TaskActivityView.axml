@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/nameTextView"
+        android:text="Name:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TaskDetailsHeader" />
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:imeOptions="actionNext"
+        android:layout_below="@+id/nameTextView"
+        android:maxLines="1" />
+    <TextView
+        android:id="@+id/notesTextView"
+        android:text="Notes:"
+        android:layout_below="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/notesEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines="1"
+        android:imeOptions="actionDone" />
+    <android.support.v7.widget.SwitchCompat
+        android:id="@+id/doneSwitch"
+        android:layout_width="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_below="@+id/notesEditText"
+        android:layout_height="wrap_content"
+        android:text="Done"
+        android:showText="true" />
+    <Button
+        android:id="@+id/cancelDeleteButton"
+        android:text="Cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/doneSwitch" />
+    <Button
+        android:id="@+id/saveButton"
+        android:text="Save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="10dip"
+        android:paddingBottom="10dip"
+        android:layout_below="@+id/cancelDeleteButton" />
+</RelativeLayout>
