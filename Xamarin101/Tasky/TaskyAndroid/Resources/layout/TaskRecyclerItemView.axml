@@ -18,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/tasky_black"
+        android:paddingBottom="@dimen/controlPaddingSize"
         android:text="Description" />
     <View
         android:layout_height="1dp"
