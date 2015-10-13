@@ -8,7 +8,6 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>Tasky</RootNamespace>
     <TargetFrameworkIdentifier>Xamarin.iOS</TargetFrameworkIdentifier>
-    <AssemblyName>TaskyiOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -132,8 +131,8 @@
   </ItemGroup>
   <ItemGroup>
     <XamarinComponentReference Include="sqlite-net">
-      <Visible>False</Visible>
       <Version>1.0.8.3</Version>
+      <Visible>False</Visible>
     </XamarinComponentReference>
     <XamarinComponentReference Include="xamarin.mobile">
       <Version>0.7.4</Version>
